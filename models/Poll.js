@@ -1,7 +1,7 @@
-const { notDeepEqual } = require('node:assert')
 const { DataTypes, Sequelize } = require('sequelize')
+const db = require('../db')
 
-const PollModel = new Sequelize('poll', {
+const PollModel = db.define('poll', {
     title: {
         type: DataTypes.STRING,
         allowNull: false, 
