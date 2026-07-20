@@ -1,7 +1,13 @@
-const db = requier("./db");
-const { PollModel, OptionModel, VoteModel } = require("./model");
+const db = require("./db");
+const { PollModel, OptionModel, VoteModel } = require('./models/index');
+
+
 
 const seedDatabase = async () => {
+
+  await db.sync({force: true});
+
+
   // 1. Create Polls & Options
   const poll1 = await PollModel.create({
     title: "Favorite Tech Stack",
@@ -14,12 +20,12 @@ const seedDatabase = async () => {
     { text: "Next.js + Supabase", Poll_id: poll1.id },
   ]);
 
-  const poll2 = await Poll.create({
+  const poll2 = await PollModel.create({
     title: "Lunch Preferences",
     description: "What should the team order for lunch on Friday?",
   });
 
-  const optionsPoll2 = await Option.bulkCreate([
+  const optionsPoll2 = await OptionModel.bulkCreate([
     { text: "Pizza", Poll_id: poll2.id },
     { text: "Tacos", Poll_id: poll2.id },
     { text: "Sushi", Poll_id: poll2.id },
@@ -37,7 +43,7 @@ const seedDatabase = async () => {
   ]);
 
   // Votes for Poll 2
-  await Vote.bulkCreate([
+  await VoteModel.bulkCreate([
     { Option_id: optionsPoll2[0].id }, // Vote Pizza
     { Option_id: optionsPoll2[1].id }, // Vote Tacos
     { Option_id: optionsPoll2[1].id }, // Vote Tacos

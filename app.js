@@ -1,5 +1,5 @@
 const express = require('express')
-const db = require('./db')
+const { PollModel, OptionModel, VoteModel, db} = require('./models')
 
 const PORT = 4000
 
@@ -10,6 +10,13 @@ app.use(express.json())
 
 app.get('/health', (req,res) => {
     res.json({status: 'It works'})
+})
+
+app.get('/polls', async (req,res) => {
+    const polls = await PollModel.findAll()
+    console.log(polls.poll)
+
+    res.status(200).json(polls)
 })
 
 
