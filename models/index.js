@@ -1,6 +1,7 @@
 const PollModel = require('./poll')
 const OptionModel = require('./option')
 const VoteModel = require('./vote')
+const db = require('../db')
 
 
 PollModel.hasMany(OptionModel)
@@ -11,5 +12,5 @@ VoteModel.belongsTo(OptionModel)
 
 
 module.exports = {
-    PollModel, OptionModel, VoteModel
+    PollModel, OptionModel, VoteModel, db
 }
