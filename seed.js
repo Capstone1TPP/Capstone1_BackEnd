@@ -15,9 +15,9 @@ const seedDatabase = async () => {
   });
 
   const optionsPoll1 = await OptionModel.bulkCreate([
-    { text: "PERN Stack (Postgres, Express, React, Node)", Poll_id: poll1.id },
-    { text: "MERN Stack (MongoDB, Express, React, Node)", Poll_id: poll1.id },
-    { text: "Next.js + Supabase", Poll_id: poll1.id },
+    { text: "PERN Stack (Postgres, Express, React, Node)", pollId: poll1.id },
+    { text: "MERN Stack (MongoDB, Express, React, Node)", pollId: poll1.id },
+    { text: "Next.js + Supabase", pollId: poll1.id },
   ]);
 
   const poll2 = await PollModel.create({
@@ -26,28 +26,28 @@ const seedDatabase = async () => {
   });
 
   const optionsPoll2 = await OptionModel.bulkCreate([
-    { text: "Pizza", Poll_id: poll2.id },
-    { text: "Tacos", Poll_id: poll2.id },
-    { text: "Sushi", Poll_id: poll2.id },
-    { text: "Salad Bowls", Poll_id: poll2.id },
+    { text: "Pizza", pollId: poll2.id },
+    { text: "Tacos", pollId: poll2.id },
+    { text: "Sushi", pollId: poll2.id },
+    { text: "Salad Bowls", pollId: poll2.id },
   ]);
 
   // 2. Cast Votes
   // Votes for Poll 1
   await VoteModel.bulkCreate([
-    { Option_id: optionsPoll1[0].id }, // Vote PERN
-    { Option_id: optionsPoll1[0].id }, // Vote PERN
-    { Option_id: optionsPoll1[0].id }, // Vote PERN
-    { Option_id: optionsPoll1[1].id }, // Vote MERN
-    { Option_id: optionsPoll1[2].id }, // Vote Next.js
+    { optionId: optionsPoll1[0].id }, // Vote PERN
+    { optionId: optionsPoll1[0].id }, // Vote PERN
+    { optionId: optionsPoll1[0].id }, // Vote PERN
+    { optionId: optionsPoll1[1].id }, // Vote MERN
+    { optionId: optionsPoll1[2].id }, // Vote Next.js
   ]);
 
   // Votes for Poll 2
   await VoteModel.bulkCreate([
-    { Option_id: optionsPoll2[0].id }, // Vote Pizza
-    { Option_id: optionsPoll2[1].id }, // Vote Tacos
-    { Option_id: optionsPoll2[1].id }, // Vote Tacos
-    { Option_id: optionsPoll2[2].id }, // Vote Sushi
+    { optionId: optionsPoll2[0].id }, // Vote Pizza
+    { optionId: optionsPoll2[1].id }, // Vote Tacos
+    { optionId: optionsPoll2[1].id }, // Vote Tacos
+    { optionId: optionsPoll2[2].id }, // Vote Sushi
   ]);
 
   console.log("Database seeded successfully!");

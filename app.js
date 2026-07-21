@@ -19,7 +19,21 @@ app.get('/polls', async (req,res) => {
     res.status(200).json(polls)
 })
 
+app.get('/polls/:id', async (req,res) => {
+    const id = Number(req.params.id)
 
+    const singlePoll = await PollModel.findByPk(id, {
+        include: {
+            model: OptionModel,
+            include: VoteModel
+    }})
+    if(!singlePoll){
+        return res.sendStatus(404);
+    }
+    res.status(200).json(singlePoll)
+
+
+})
 
 async function startApp() {
     await db.sync()
