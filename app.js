@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors')
 const { PollModel, OptionModel, VoteModel, db } = require("./models");
 
 const PORT = 4000;
@@ -6,6 +7,7 @@ const PORT = 4000;
 const app = express();
 
 app.use(express.json());
+app.use(cors())
 
 app.get("/health", (req, res) => {
   res.json({ status: "It works" });
@@ -39,15 +41,14 @@ app.post("/polls", async (req, res) => {
   const newPoll = await PollModel.create({ title, description });
 
   const createdOptions = options.map(async (option) => {
-    await OptionModel.create({ text: option.text, pollId: newPoll.id });
+    await OptionModel.create({ text: option, pollId: newPoll.id });
   });
 
   res.status(200).json(newPoll);
 });
 
 app.post("/polls/:id/vote", async (req, res) => {
-  //optionId UUID for the vote.
-  const { optionId } = req.body;
+  const optionId  = Number(req.body.optionId); //frontend id
 
   const id = Number(req.params.id);
   const poll = await PollModel.findByPk(id);
@@ -55,8 +56,7 @@ app.post("/polls/:id/vote", async (req, res) => {
   if (!poll) {
     res.status(404).json("no poll");
   }
-
-  const vote = await VoteModel.create({ optionId });
+  const vote = await VoteModel.create({ optionId});
 
   res.status(201).json(vote);
 });
