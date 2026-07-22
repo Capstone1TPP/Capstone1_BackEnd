@@ -7,7 +7,7 @@ const db = require('../db')
 PollModel.hasMany(OptionModel)
 OptionModel.belongsTo(PollModel)
 
-OptionModel.hasMany(VoteModel)
+OptionModel.hasMany(VoteModel) 
 VoteModel.belongsTo(OptionModel)
 
 

@@ -8,6 +8,7 @@ const PollModel = db.define('poll', {
         validate: {
             notEmpty: true
         }
+        
     },
     description: {
         type: DataTypes.STRING,
