@@ -1,5 +1,4 @@
-const db = require("./db");
-const { PollModel, OptionModel, VoteModel } = require('./models/index');
+const { PollModel, OptionModel, VoteModel ,db} = require('./models/index');
 
 
 
