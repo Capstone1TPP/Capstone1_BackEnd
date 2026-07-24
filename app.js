@@ -41,7 +41,7 @@ app.post("/polls", async (req, res) => {
   const newPoll = await PollModel.create({ title, description });
 
   const createdOptions = options.map(async (option) => {
-    await OptionModel.create({ text: option, pollId: newPoll.id });
+    await OptionModel.create({ text: option.text, pollId: newPoll.id });
   });
 
   res.status(200).json(newPoll);
